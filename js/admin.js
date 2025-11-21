@@ -144,17 +144,30 @@ function displayItems() {
 }
 
 // Show editor
-function showEditor() {
+function showEditor(shouldReset = true) {
     const editorTitle = document.getElementById('editor-title');
     const categoryLabel = document.getElementById('category-label');
+    const liveUrlGroup = document.getElementById('live-url-group');
 
     editorTitle.textContent = currentMode === 'posts' ? 'Post Editor' : 'Project Editor';
     categoryLabel.textContent = currentMode === 'posts' ? 'Category' : 'Technologies';
 
+    // Show/hide Live URL field based on mode
+    if (currentMode === 'projects') {
+        liveUrlGroup.style.display = 'block';
+    } else {
+        liveUrlGroup.style.display = 'none';
+    }
+
     document.getElementById('editor-section').classList.remove('hidden');
-    document.getElementById('post-form').reset();
-    document.getElementById('post-id').value = '';
-    editingPostId = null;
+
+    // Only reset form when creating new items, not when editing
+    if (shouldReset) {
+        document.getElementById('post-form').reset();
+        document.getElementById('post-id').value = '';
+        editingPostId = null;
+    }
+
     window.scrollTo({ top: document.getElementById('editor-section').offsetTop - 100, behavior: 'smooth' });
 }
 
@@ -178,8 +191,14 @@ function editItem(id) {
     document.getElementById('post-category').value = item.category || item.technologies || '';
     document.getElementById('post-content').value = item.content;
 
+    // Handle Live URL for projects
+    const liveUrlInput = document.getElementById('post-live-url');
+    if (liveUrlInput && currentMode === 'projects') {
+        liveUrlInput.value = item.liveUrl || '';
+    }
+
     editingPostId = id;
-    showEditor();
+    showEditor(false); // Don't reset the form when editing
 }
 
 // Delete item - NO CONFIRMATION NEEDED (Simplified for now)
@@ -237,6 +256,7 @@ document.getElementById('post-form').addEventListener('submit', function (e) {
     const bannerUrl = document.getElementById('post-banner').value;
     const categoryOrTech = document.getElementById('post-category').value;
     const content = document.getElementById('post-content').value;
+    const liveUrl = document.getElementById('post-live-url').value;
 
     const itemData = {
         title,
@@ -251,6 +271,7 @@ document.getElementById('post-form').addEventListener('submit', function (e) {
         itemData.category = categoryOrTech;
     } else {
         itemData.technologies = categoryOrTech;
+        if (liveUrl) itemData.liveUrl = liveUrl;
     }
 
     if (editingPostId) {

@@ -243,6 +243,7 @@ async function loadSingleProject() {
 
             <div style="margin-top: var(--spacing-lg); display: flex; gap: 1rem; flex-wrap: wrap;">
                 <a href="projects.html" class="btn btn-primary">← Back to Projects</a>
+                ${project.liveUrl ? `<a href="${project.liveUrl}" target="_blank" rel="noopener" class="btn btn-primary" style="background: transparent; border: 1px solid var(--accent-primary); color: var(--accent-primary);">View Live Project ↗</a>` : ''}
             </div>
         `;
 
