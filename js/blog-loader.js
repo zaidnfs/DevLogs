@@ -1,66 +1,40 @@
 // Blog and Projects page - Load and display content dynamically
 
-// Common function to sort items: Order (asc) -> Date (desc)
-function sortItems(items) {
-    return items.sort((a, b) => {
-        const orderA = a.order !== undefined ? a.order : 9999;
-        const orderB = b.order !== undefined ? b.order : 9999;
-
-        // Primary Sort: Order (Low to High)
-        if (orderA !== orderB) {
-            return orderA - orderB;
-        }
-        // Secondary Sort: Date (Newest to Oldest)
-        return new Date(b.createdAt || b.date) - new Date(a.createdAt || a.date);
-    });
-}
-
 async function loadBlogPosts() {
     const postsContainer = document.getElementById('blog-posts-grid');
     if (!postsContainer) return;
 
     try {
-        // Attempt to fetch from JSON, fallback to empty array which lets us use localStorage if JSON fails
-        let posts = [];
-        try {
-            const response = await fetch('data/posts.json');
-            if (response.ok) {
-                const data = await response.json();
-                posts = data.posts || [];
-            }
-        } catch (e) {
-            console.log("Loading from local storage...");
-            const savedPosts = localStorage.getItem('blogPosts');
-            if (savedPosts) posts = JSON.parse(savedPosts);
-        }
+        const response = await fetch('data/posts.json');
+        if (!response.ok) throw new Error('Failed to load posts');
+
+        const data = await response.json();
+        const posts = data.posts || [];
 
         if (posts.length === 0) {
-            postsContainer.innerHTML = `<p style="grid-column: 1/-1; text-align: center;">No posts yet.</p>`;
+            postsContainer.innerHTML = `
+                <div style="grid-column: 1/-1; text-align: center; padding: 4rem 0;">
+                    <h2 style="color: var(--text-secondary); margin-bottom: 1rem;">No posts yet</h2>
+                    <p style="color: var(--text-muted);">Check back soon for new content!</p>
+                    <a href="admin.html" class="card-link" style="margin-top: 1rem;">Create Your First Post →</a>
+                </div>
+            `;
             return;
         }
 
-        // Sort
-        posts = sortItems(posts);
-
+        // Array of gradient colors to cycle through
         const gradients = [
-            'linear-gradient(135deg, #3b82f6, #1d4ed8)',
-            'linear-gradient(135deg, #8b5cf6, #6d28d9)',
-            'linear-gradient(135deg, #10b981, #059669)',
-            'linear-gradient(135deg, #f59e0b, #d97706)',
+            'linear-gradient(135deg, #3b82f6, #1d4ed8)', // Blue
+            'linear-gradient(135deg, #8b5cf6, #6d28d9)', // Purple
+            'linear-gradient(135deg, #10b981, #059669)', // Green
+            'linear-gradient(135deg, #f59e0b, #d97706)', // Orange
+            'linear-gradient(135deg, #ef4444, #b91c1c)', // Red
+            'linear-gradient(135deg, #06b6d4, #0891b2)', // Cyan
         ];
 
-        postsContainer.innerHTML = posts.map((post, index) => {
-            // Image Logic
-            let imageStyle;
-            if (post.imageUrl) {
-                imageStyle = `background-image: url('${post.imageUrl}');`;
-            } else {
-                imageStyle = `background: ${gradients[index % gradients.length]};`;
-            }
-
-            return `
+        postsContainer.innerHTML = posts.map((post, index) => `
             <article class="card reveal-squeeze">
-                <div class="card-image" style="${imageStyle}"></div>
+                <div class="card-image" style="background: ${gradients[index % gradients.length]};"></div>
                 <div class="card-content">
                     <div class="card-date">${post.date}</div>
                     <h3 class="card-title">${post.title}</h3>
@@ -68,12 +42,19 @@ async function loadBlogPosts() {
                     <a href="post.html?id=${post.id}" class="card-link">Read Article →</a>
                 </div>
             </article>
-        `}).join('');
+        `).join('');
 
-        if (typeof initScrollAnimations === 'function') initScrollAnimations();
-
+        // Re-initialize scroll animations for new elements
+        if (typeof initScrollAnimations === 'function') {
+            initScrollAnimations();
+        }
     } catch (error) {
         console.error('Error loading posts:', error);
+        postsContainer.innerHTML = `
+            <div style="grid-column: 1/-1; text-align: center; padding: 4rem 0;">
+                <p style="color: var(--text-muted);">Unable to load posts. Please try again later.</p>
+            </div>
+        `;
     }
 }
 
@@ -82,62 +63,61 @@ async function loadProjects() {
     if (!projectsContainer) return;
 
     try {
-        let projects = [];
-        try {
-            const response = await fetch('data/posts.json');
-            if (response.ok) {
-                const data = await response.json();
-                projects = data.projects || [];
-            }
-        } catch (e) {
-            const savedProjects = localStorage.getItem('blogProjects');
-            if (savedProjects) projects = JSON.parse(savedProjects);
-        }
+        const response = await fetch('data/posts.json');
+        if (!response.ok) throw new Error('Failed to load projects');
+
+        const data = await response.json();
+        const projects = data.projects || [];
 
         if (projects.length === 0) {
-            projectsContainer.innerHTML = `<p style="grid-column: 1/-1; text-align: center;">No projects yet.</p>`;
+            projectsContainer.innerHTML = `
+                <div style="grid-column: 1/-1; text-align: center; padding: 4rem 0;">
+                    <h2 style="color: var(--text-secondary); margin-bottom: 1rem;">No projects yet</h2>
+                    <p style="color: var(--text-muted);">Check back soon for new projects!</p>
+                    <a href="admin.html" class="card-link" style="margin-top: 1rem;">Add Your First Project →</a>
+                </div>
+            `;
             return;
         }
 
-        // Sort
-        projects = sortItems(projects);
-
+        // Array of gradient colors to cycle through for projects
         const gradients = [
-            'linear-gradient(135deg, #ef4444, #b91c1c)',
-            'linear-gradient(135deg, #3b82f6, #2563eb)',
-            'linear-gradient(135deg, #10b981, #059669)',
+            'linear-gradient(135deg, #ef4444, #b91c1c)', // Red
+            'linear-gradient(135deg, #3b82f6, #2563eb)', // Blue
+            'linear-gradient(135deg, #10b981, #059669)', // Green
+            'linear-gradient(135deg, #8b5cf6, #7c3aed)', // Purple
+            'linear-gradient(135deg, #f59e0b, #d97706)', // Orange
+            'linear-gradient(135deg, #06b6d4, #0891b2)', // Cyan
         ];
 
-        projectsContainer.innerHTML = projects.map((project, index) => {
-            // Image Logic
-            let imageStyle;
-            if (project.imageUrl) {
-                imageStyle = `background-image: url('${project.imageUrl}');`;
-            } else {
-                imageStyle = `background: ${gradients[index % gradients.length]};`;
-            }
-
-            return `
+        projectsContainer.innerHTML = projects.map((project, index) => `
             <article class="card reveal-squeeze">
-                <div class="card-image" style="${imageStyle}"></div>
+                <div class="card-image" style="background: ${gradients[index % gradients.length]};"></div>
                 <div class="card-content">
                     <div class="card-date">${project.date}</div>
                     <h3 class="card-title">${project.title}</h3>
                     <p class="card-excerpt">${project.excerpt}</p>
                     <div class="skills" style="margin-top: auto; margin-bottom: var(--spacing-sm);">
                         ${project.technologies ? project.technologies.split(',').map(tech =>
-                `<span class="skill-tag skill-tag-small">${tech.trim()}</span>`
-            ).join('') : ''}
+            `<span class="skill-tag skill-tag-small">${tech.trim()}</span>`
+        ).join('') : ''}
                     </div>
                     <a href="project-detail.html?id=${project.id}" class="card-link">View Project →</a>
                 </div>
             </article>
-        `}).join('');
+        `).join('');
 
-        if (typeof initScrollAnimations === 'function') initScrollAnimations();
-
+        // Re-initialize scroll animations for new elements
+        if (typeof initScrollAnimations === 'function') {
+            initScrollAnimations();
+        }
     } catch (error) {
         console.error('Error loading projects:', error);
+        projectsContainer.innerHTML = `
+            <div style="grid-column: 1/-1; text-align: center; padding: 4rem 0;">
+                <p style="color: var(--text-muted);">Unable to load projects. Please try again later.</p>
+            </div>
+        `;
     }
 }
 
