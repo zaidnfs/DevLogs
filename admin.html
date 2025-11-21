@@ -216,7 +216,7 @@
     <!-- Navbar -->
     <nav class="navbar">
         <div class="container nav-container">
-            <a href="index.html" class="logo">DevLogs by Z</a>
+            <a href="index.html" class="logo">DevLogs</a>
             <button class="mobile-menu-btn" aria-label="Toggle Menu">☰</button>
             <ul class="nav-links">
                 <li><a href="index.html" class="nav-link">Home</a></li>
@@ -331,17 +331,22 @@
 
                 <div class="form-group">
                     <label for="post-title">Title</label>
-                    <input type="text" id="post-title" required placeholder="Enter title">
+                    <input type="text" id="post-title" required>
                 </div>
 
                 <div class="form-group">
-                    <label for="post-excerpt">Excerpt</label>
-                    <input type="text" id="post-excerpt" required placeholder="Brief description">
+                    <label for="post-excerpt">Excerpt (Short Summary)</label>
+                    <textarea id="post-excerpt" style="min-height: 100px;" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="post-banner">Banner Image URL (Optional)</label>
+                    <input type="url" id="post-banner" placeholder="https://example.com/image.jpg">
                 </div>
 
                 <div class="form-group">
                     <label id="category-label" for="post-category">Category</label>
-                    <input type="text" id="post-category" required placeholder="e.g., Web Development, React, Node.js">
+                    <input type="text" id="post-category" required>
                 </div>
 
                 <div class="form-group">

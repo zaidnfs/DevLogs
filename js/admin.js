@@ -174,6 +174,7 @@ function editItem(id) {
     document.getElementById('post-id').value = item.id;
     document.getElementById('post-title').value = item.title;
     document.getElementById('post-excerpt').value = item.excerpt;
+    document.getElementById('post-banner').value = item.bannerUrl || '';
     document.getElementById('post-category').value = item.category || item.technologies || '';
     document.getElementById('post-content').value = item.content;
 
@@ -233,12 +234,14 @@ document.getElementById('post-form').addEventListener('submit', function (e) {
     const postId = document.getElementById('post-id').value;
     const title = document.getElementById('post-title').value;
     const excerpt = document.getElementById('post-excerpt').value;
+    const bannerUrl = document.getElementById('post-banner').value;
     const categoryOrTech = document.getElementById('post-category').value;
     const content = document.getElementById('post-content').value;
 
     const itemData = {
         title,
         excerpt,
+        bannerUrl,
         content,
         date: formatDate(new Date()),
         createdAt: new Date().toISOString()

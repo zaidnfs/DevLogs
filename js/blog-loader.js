@@ -163,26 +163,30 @@ async function loadSinglePost() {
             return;
         }
 
-        // Update page title
-        document.title = `${post.title} | DevLogs by Z`;
+        // Update page title and meta description
+        document.title = `${post.title} | DevLogs`;
+        document.querySelector('meta[name="description"]').content = post.excerpt;
 
-        // Update post header
-        const postHeader = document.querySelector('.post-header');
-        if (postHeader) {
-            postHeader.innerHTML = `
-                <span class="post-meta">${post.category}</span>
-                <h1 class="post-title">${post.title}</h1>
-                <p style="color: var(--text-secondary); max-width: 700px; margin: 0 auto;">${post.excerpt}</p>
-                <p style="color: var(--text-muted); margin-top: 1rem; font-size: 0.875rem;">${post.date}</p>
-            `;
+        // Render Post Header
+        const header = document.querySelector('.post-header');
+        header.innerHTML = `
+            <div class="post-meta">${post.date} • ${post.category}</div>
+            <h1 class="post-title">${post.title}</h1>
+            ${post.bannerUrl ? `<div class="post-image" style="background-image: url('${post.bannerUrl}'); background-size: cover; background-position: center;"></div>` : '<div class="post-image"></div>'}
+        `;
+
+        // Render Post Content
+        const contentContainer = document.querySelector('.post-content');
+        // Simple markdown-like parsing for content
+        const formattedContent = markdownToHtml(post.content);
+
+        contentContainer.innerHTML = formattedContent;
+
+        // Re-initialize animations for the new content
+        if (window.initScrollAnimations) {
+            setTimeout(window.initScrollAnimations, 100);
         }
 
-        // Update post content
-        const postContent = document.querySelector('.post-content');
-        if (postContent) {
-            const htmlContent = markdownToHtml(post.content);
-            postContent.innerHTML = `<p>${htmlContent}</p>`;
-        }
     } catch (error) {
         console.error('Error loading post:', error);
         showPostNotFound();
@@ -208,30 +212,43 @@ async function loadSingleProject() {
             return;
         }
 
-        // Update page title
-        document.title = `${project.title} | DevLogs by Z`;
+        // Update page title and meta description
+        document.title = `${project.title} | DevLogs`;
+        document.querySelector('meta[name="description"]').content = project.excerpt;
 
-        // Update project header
-        const projectHeader = document.querySelector('.post-header');
-        if (projectHeader) {
-            projectHeader.innerHTML = `
-                <span class="post-meta">Featured Project</span>
-                <h1 class="post-title">${project.title}</h1>
-                <p style="color: var(--text-secondary); max-width: 700px; margin: 0 auto;">${project.excerpt}</p>
-            `;
-        }
+        // Render Project Header
+        const header = document.querySelector('.post-header');
+        header.innerHTML = `
+            <span class="post-meta">Featured Project</span>
+            <h1 class="post-title">${project.title}</h1>
+            <p style="color: var(--text-secondary); max-width: 700px; margin: 0 auto;">${project.excerpt}</p>
+        `;
 
-        // Update project content
-        const projectContent = document.querySelector('.post-content');
-        if (projectContent) {
-            const htmlContent = markdownToHtml(project.content);
-            projectContent.innerHTML = `
-                <div class="post-image"></div>
-                ${htmlContent}
-                <div style="margin-top: var(--spacing-lg);">
-                    <a href="projects.html" class="btn btn-primary">← Back to Projects</a>
-                </div>
-            `;
+        // Render Project Content
+        const contentContainer = document.querySelector('.post-content');
+
+        // Format content
+        const formattedContent = markdownToHtml(project.content);
+
+        contentContainer.innerHTML = `
+            ${project.bannerUrl ? `<div class="post-image" style="background-image: url('${project.bannerUrl}'); background-size: cover; background-position: center;"></div>` : '<div class="post-image"></div>'}
+            
+            <h2>Overview</h2>
+            ${formattedContent}
+
+            <h2>Technologies Used</h2>
+            <div class="skills" style="margin-bottom: var(--spacing-md);">
+                ${project.technologies ? project.technologies.split(',').map(tech => `<span class="skill-tag">${tech.trim()}</span>`).join('') : ''}
+            </div>
+
+            <div style="margin-top: var(--spacing-lg); display: flex; gap: 1rem; flex-wrap: wrap;">
+                <a href="projects.html" class="btn btn-primary">← Back to Projects</a>
+            </div>
+        `;
+
+        // Re-initialize animations for the new content
+        if (window.initScrollAnimations) {
+            setTimeout(window.initScrollAnimations, 100);
         }
     } catch (error) {
         console.error('Error loading project:', error);
