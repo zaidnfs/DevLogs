@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Details | My Personal Blog</title>
+    <meta name="description" content="Detailed view of my project">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">DevLogs by Z</a>
+            <button class="mobile-menu-btn" aria-label="Toggle Menu">☰</button>
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="blog.html" class="nav-link">Articles</a></li>
+                <li><a href="projects.html" class="nav-link active">Projects</a></li>
+                <li><a href="index.html#about" class="nav-link">About</a></li>
+                <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+                <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle Dark Mode"><svg
+                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="5" />
+                            <line x1="12" y1="1" x2="12" y2="3" />
+                            <line x1="12" y1="21" x2="12" y2="23" />
+                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+                            <line x1="1" y1="12" x2="3" y2="12" />
+                            <line x1="21" y1="12" x2="23" y2="12" />
+                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+                        </svg></button></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Project Header -->
+    <header class="post-header reveal-squeeze">
+        <span class="post-meta">Featured Project</span>
+        <h1 class="post-title">E-Commerce Dashboard</h1>
+        <p style="color: var(--text-secondary); max-width: 700px; margin: 0 auto;">A comprehensive analytics dashboard
+            for online stores, featuring real-time data visualization and inventory management.</p>
+    </header>
+
+    <!-- Project Content -->
+    <main>
+        <article class="post-content reveal-squeeze">
+            <!-- Project Image -->
+            <div class="post-image"></div>
+
+            <h2>Overview</h2>
+            <p>This project is a full-featured e-commerce analytics dashboard built to help online store owners make
+                data-driven decisions. The platform provides real-time insights into sales, inventory, and customer
+                behavior.</p>
+
+            <h2>Key Features</h2>
+            <ul>
+                <li>Real-time sales tracking and analytics</li>
+                <li>Interactive data visualizations using D3.js</li>
+                <li>Inventory management system</li>
+                <li>Customer behavior analysis</li>
+                <li>Responsive design for mobile and desktop</li>
+            </ul>
+
+            <h2>Technologies Used</h2>
+            <div class="skills" style="margin-bottom: var(--spacing-md);">
+                <span class="skill-tag">React</span>
+                <span class="skill-tag">D3.js</span>
+                <span class="skill-tag">Node.js</span>
+                <span class="skill-tag">MongoDB</span>
+                <span class="skill-tag">Express</span>
+            </div>
+
+            <h2>Challenges & Solutions</h2>
+            <p>One of the main challenges was handling real-time data updates without compromising performance. We
+                solved this by implementing WebSocket connections and optimizing our data fetching strategy.</p>
+
+            <h2>Results</h2>
+            <p>The dashboard has been successfully deployed and is currently being used by over 50 online stores,
+                helping them increase their sales by an average of 23% through better data insights.</p>
+
+            <div style="margin-top: var(--spacing-lg); display: flex; gap: 1rem; flex-wrap: wrap;">
+                <a href="projects.html" class="btn btn-primary">← Back to Projects</a>
+                <a href="#" class="card-link">View Live Demo →</a>
+            </div>
+        </article>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2023 My Personal Blog. Built with &hearts; and Code.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>

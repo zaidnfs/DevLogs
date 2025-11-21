@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - DevLogs by Z</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .admin-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 140px 2rem 4rem;
+        }
+
+        .admin-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .admin-header h1 {
+            background: var(--heading-gradient);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .mode-switcher {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            justify-content: center;
+        }
+
+        .mode-btn {
+            padding: 0.75rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition-fast);
+            border: 2px solid var(--accent-primary);
+            background: transparent;
+            color: var(--accent-primary);
+        }
+
+        .mode-btn.active {
+            background: var(--accent-gradient);
+            color: white;
+        }
+
+        .mode-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(90, 79, 207, 0.3);
+        }
+
+        .posts-list {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .post-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .post-item:last-child {
+            border-bottom: none;
+        }
+
+        .post-info h3 {
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .post-info p {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+
+        .post-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn-edit,
+        .btn-delete {
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition-fast);
+            font-size: 0.875rem;
+        }
+
+        .btn-edit {
+            background: var(--accent-primary);
+            color: white;
+            border: none;
+        }
+
+        .btn-delete {
+            background: transparent;
+            border: 1px solid var(--accent-primary);
+            color: var(--accent-primary);
+        }
+
+        .btn-delete:hover {
+            background: var(--accent-primary);
+            color: white;
+        }
+
+        .editor-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            font-size: 1rem;
+        }
+
+        .form-group textarea {
+            min-height: 300px;
+            resize: vertical;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn-save {
+            background: var(--accent-gradient);
+            color: white;
+            padding: 0.75rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: var(--transition-fast);
+        }
+
+        .btn-save:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(90, 79, 207, 0.4);
+        }
+
+        .btn-cancel {
+            background: transparent;
+            border: 2px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 0.75rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition-fast);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .alert {
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .alert-success {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid #10b981;
+            color: #10b981;
+        }
+
+        .alert-error {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid #ef4444;
+            color: #ef4444;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">DevLogs by Z</a>
+            <button class="mobile-menu-btn" aria-label="Toggle Menu">☰</button>
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="blog.html" class="nav-link">Articles</a></li>
+                <li><a href="projects.html" class="nav-link">Projects</a></li>
+                <li><a href="admin.html" class="nav-link active">Admin</a></li>
+                <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle Dark Mode"><svg
+                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="5" />
+                            <line x1="12" y1="1" x2="12" y2="3" />
+                            <line x1="12" y1="21" x2="12" y2="23" />
+                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+                            <line x1="1" y1="12" x2="3" y2="12" />
+                            <line x1="21" y1="12" x2="23" y2="12" />
+                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+                        </svg></button></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="admin-container">
+        <div class="admin-header">
+            <h1>Content Admin Panel</h1>
+            <p style="color: var(--text-secondary);">Create and manage your blog posts and projects</p>
+
+            <div
+                style="margin-top: 2rem; padding: 1.5rem; background: rgba(90, 79, 207, 0.1); border: 1px solid var(--accent-primary); border-radius: 12px; text-align: left;">
+                <h3 style="color: var(--text-primary); margin-bottom: 0.5rem;">🚀 How to Publish</h3>
+                <ol style="color: var(--text-secondary); margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                    <li>Create or edit your posts/projects below.</li>
+                    <li><strong>Option A (Easy):</strong> Click "Copy Data", open <code>data/posts.json</code>, and
+                        Paste.</li>
+                    <li><strong>Option B:</strong> Click "Download", rename to <code>posts.json</code>, and move to
+                        <code>data/</code> folder.
+                    </li>
+                </ol>
+                <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                    <button onclick="copyData()" class="btn-save"
+                        style="flex: 1; display: flex; justify-content: center; align-items: center; gap: 0.5rem; background: var(--accent-primary);">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        Copy Data
+                    </button>
+                    <button onclick="downloadData()" class="btn-save"
+                        style="flex: 1; display: flex; justify-content: center; align-items: center; gap: 0.5rem;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="7 10 12 15 17 10"></polyline>
+                            <line x1="12" y1="15" x2="12" y2="3"></line>
+                        </svg>
+                        Download
+                    </button>
+                    <button onclick="viewRawData()" class="btn-save"
+                        style="flex: 1; display: flex; justify-content: center; align-items: center; gap: 0.5rem; background: transparent; border: 1px solid var(--accent-primary); color: var(--accent-primary);">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                            <circle cx="12" cy="12" r="3"></circle>
+                        </svg>
+                        View Raw Data
+                    </button>
+                </div>
+
+                <!-- Raw Data Container -->
+                <div id="raw-data-container" class="hidden" style="margin-top: 1.5rem;">
+                    <p style="margin-bottom: 0.5rem; color: var(--text-primary); font-weight: 600;">Select All (Ctrl+A)
+                        and Copy (Ctrl+C):</p>
+                    <textarea id="raw-data-textarea"
+                        style="width: 100%; height: 200px; padding: 1rem; background: rgba(0,0,0,0.3); border: 1px solid var(--accent-primary); border-radius: 8px; color: var(--text-muted); font-family: monospace;"
+                        readonly></textarea>
+                    <button onclick="document.getElementById('raw-data-container').classList.add('hidden')"
+                        class="btn-cancel"
+                        style="margin-top: 0.5rem; padding: 0.5rem 1rem; font-size: 0.875rem;">Close</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="alert-container"></div>
+
+        <!-- Mode Switcher -->
+        <div class="mode-switcher">
+            <button class="mode-btn active" data-mode="posts" onclick="switchMode('posts')">
+                Blog Posts
+            </button>
+            <button class="mode-btn" data-mode="projects" onclick="switchMode('projects')">
+                Projects
+            </button>
+        </div>
+
+        <!-- Posts List -->
+        <div class="posts-list">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                <h2 style="color: var(--text-primary);">Your Content</h2>
+                <button class="btn-save" onclick="showEditor()">+ New Item</button>
+            </div>
+            <div id="posts-container">
+                <p style="color: var(--text-muted); text-align: center;">No items yet. Create your first one!</p>
+            </div>
+        </div>
+
+        <!-- Editor Section -->
+        <div id="editor-section" class="editor-section hidden">
+            <h2 id="editor-title" style="color: var(--text-primary); margin-bottom: 1.5rem;">Editor</h2>
+            <form id="post-form">
+                <input type="hidden" id="post-id">
+
+                <div class="form-group">
+                    <label for="post-title">Title</label>
+                    <input type="text" id="post-title" required placeholder="Enter title">
+                </div>
+
+                <div class="form-group">
+                    <label for="post-excerpt">Excerpt</label>
+                    <input type="text" id="post-excerpt" required placeholder="Brief description">
+                </div>
+
+                <div class="form-group">
+                    <label id="category-label" for="post-category">Category</label>
+                    <input type="text" id="post-category" required placeholder="e.g., Web Development, React, Node.js">
+                </div>
+
+                <div class="form-group">
+                    <label for="post-content">Content (Supports Markdown)</label>
+                    <textarea id="post-content" required
+                        placeholder="Write your content here...&#10;&#10;Markdown supported:&#10;# Heading&#10;## Subheading&#10;**bold** *italic*&#10;[Link Text](https://example.com)&#10;- List item&#10;`code`"></textarea>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn-save">Save</button>
+                    <button type="button" class="btn-cancel" onclick="hideEditor()">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+
+</html>

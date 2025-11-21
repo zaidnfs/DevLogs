@@ -1,0 +1,62 @@
+:root {
+    /* Color Palette - Premium Dark Mode */
+    --bg-primary: #000000;
+    --bg-secondary: #0a0a0a;
+    --bg-card: rgba(255, 255, 255, 0.03);
+    --bg-glass: rgba(0, 0, 0, 0.9);
+
+    --text-primary: #EDEBFF;
+    --text-secondary: #A39DFF;
+    --text-muted: #7E7A9F;
+
+    --accent-primary: #5A4FCF;
+    --accent-secondary: #A39DFF;
+    --accent-gradient: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+
+    --border-color: rgba(163, 157, 255, 0.2);
+
+    /* Typography */
+    --font-heading: 'Outfit', sans-serif;
+    --font-body: 'Inter', sans-serif;
+
+    /* Spacing */
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 2rem;
+    --spacing-lg: 4rem;
+    --spacing-xl: 8rem;
+
+    /* Transitions */
+    --transition-fast: 0.2s ease;
+    --transition-smooth: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+    /* Shadows */
+    --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --shadow-glow: 0 0 20px rgba(90, 79, 207, 0.3);
+
+    /* Heading Gradients */
+    --heading-gradient: linear-gradient(to right, #EDEBFF, #A39DFF);
+}
+
+/* Light Mode Override */
+[data-theme="light"] {
+    --bg-primary: #FAFAFF;
+    --bg-secondary: #EDE7F6;
+    --bg-card: #FFFFFF;
+    --bg-glass: rgba(250, 250, 255, 0.9);
+
+    --text-primary: #2C2C2C;
+    --text-secondary: #5E5E5E;
+    --text-muted: #9E9E9E;
+
+    --accent-primary: #7E57C2;
+    --accent-secondary: #D1C4E9;
+    --accent-gradient: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+
+    --border-color: #D1C4E9;
+
+    --shadow-glow: 0 0 20px rgba(126, 87, 194, 0.3);
+
+    /* Heading Gradients */
+    --heading-gradient: linear-gradient(to right, #2C2C2C, #7E57C2);
+}

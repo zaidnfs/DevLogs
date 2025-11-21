@@ -1,0 +1,33 @@
+{
+    "posts": [
+        {
+            "id": "mi8wq5kqv2k7iupfk7d",
+            "title": "testing-6",
+            "excerpt": "q",
+            "content": "q",
+            "date": "November 21, 2025",
+            "createdAt": "2025-11-21T13:39:49.562Z",
+            "category": "q"
+        },
+        {
+            "id": "mi8wa0w3incba593fo8",
+            "title": "testing-4",
+            "excerpt": "q",
+            "content": "q",
+            "date": "November 21, 2025",
+            "createdAt": "2025-11-21T13:27:16.995Z",
+            "category": "q"
+        }
+    ],
+    "projects": [
+        {
+            "id": "mi8wqwt48zjowfh1o3f",
+            "title": "testing-6",
+            "excerpt": "q",
+            "content": "q",
+            "date": "November 21, 2025",
+            "createdAt": "2025-11-21T13:40:24.856Z",
+            "technologies": "q"
+        }
+    ]
+}
