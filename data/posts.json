@@ -45,9 +45,11 @@
       "excerpt": "What is Lorem Ipsum?",
       "bannerUrl": "https://images.pexels.com/photos/220769/pexels-photo-220769.jpeg",
       "content": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-      "date": "November 22, 2025",
-      "createdAt": "2025-11-21T19:08:14.931Z",
-      "technologies": "Lorem Ipsum"
+      "date": "November 30, 2025",
+      "createdAt": "2025-11-29T19:24:49.181Z",
+      "technologies": "Lorem Ipsum",
+      "liveUrl": "https://github.com/zaidnfs",
+      "updatedAt": "2025-11-29T19:24:49.181Z"
     },
     {
       "id": "mi8wqwt48zjowfh1o3f",

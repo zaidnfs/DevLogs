@@ -33,10 +33,15 @@ async function loadBlogPosts() {
             'linear-gradient(135deg, #ef4444, #b91c1c)', // Red
             'linear-gradient(135deg, #06b6d4, #0891b2)', // Cyan
         ];
-        
-        postsContainer.innerHTML = displayPosts.map((post, index) => `
+
+        postsContainer.innerHTML = displayPosts.map((post, index) => {
+            const backgroundStyle = post.bannerUrl
+                ? `background-image: url('${post.bannerUrl}'); background-size: cover; background-position: center;`
+                : `background: ${gradients[index % gradients.length]};`;
+
+            return `
             <article class="card reveal-squeeze">
-                <div class="card-image" style="background: ${gradients[index % gradients.length]};"></div>
+                <div class="card-image" style="${backgroundStyle}"></div>
                 <div class="card-content">
                     <div class="card-date">${post.date}</div>
                     <h3 class="card-title">${post.title}</h3>
@@ -44,7 +49,8 @@ async function loadBlogPosts() {
                     <a href="post.html?id=${post.id}" class="card-link">Read Article →</a>
                 </div>
             </article>
-        `).join('');
+            `;
+        }).join('');
 
         // Re-initialize scroll animations for new elements
         if (typeof initScrollAnimations === 'function') {
@@ -94,22 +100,28 @@ async function loadProjects() {
             'linear-gradient(135deg, #06b6d4, #0891b2)', // Cyan
         ];
 
-        projectsContainer.innerHTML = displayProjects.map((project, index) => `
+        projectsContainer.innerHTML = displayProjects.map((project, index) => {
+            const backgroundStyle = project.bannerUrl
+                ? `background-image: url('${project.bannerUrl}'); background-size: cover; background-position: center;`
+                : `background: ${gradients[index % gradients.length]};`;
+
+            return `
             <article class="card reveal-squeeze">
-                <div class="card-image" style="background: ${gradients[index % gradients.length]};"></div>
+                <div class="card-image" style="${backgroundStyle}"></div>
                 <div class="card-content">
                     <div class="card-date">${project.date}</div>
                     <h3 class="card-title">${project.title}</h3>
                     <p class="card-excerpt">${project.excerpt}</p>
                     <div class="skills" style="margin-top: auto; margin-bottom: var(--spacing-sm);">
                         ${project.technologies ? project.technologies.split(',').map(tech =>
-            `<span class="skill-tag skill-tag-small">${tech.trim()}</span>`
-        ).join('') : ''}
+                `<span class="skill-tag skill-tag-small">${tech.trim()}</span>`
+            ).join('') : ''}
                     </div>
                     <a href="project-detail.html?id=${project.id}" class="card-link">View Project →</a>
                 </div>
             </article>
-        `).join('');
+            `;
+        }).join('');
 
         // Re-initialize scroll animations for new elements
         if (typeof initScrollAnimations === 'function') {
