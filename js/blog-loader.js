@@ -150,7 +150,9 @@ function markdownToHtml(markdown) {
         .replace(/\*\*\*(.+?)\*\*\*/g, '<strong><em>$1</em></strong>')
         .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
         .replace(/\*(.+?)\*/g, '<em>$1</em>')
-        // Code blocks
+        // Code blocks (Triple backticks)
+        .replace(/```([\s\S]*?)```/g, '<pre style="background: rgba(0, 0, 0, 0.1); padding: 1rem; border-radius: 8px; overflow-x: auto;"><code style="font-family: monospace;">$1</code></pre>')
+        // Inline Code (Single backtick)
         .replace(/`([^`]+)`/g, '<code style="background: rgba(90, 79, 207, 0.1); padding: 0.2rem 0.4rem; border-radius: 4px; font-family: monospace;">$1</code>')
         // Lists
         .replace(/^\- (.+)$/gim, '<li>$1</li>')

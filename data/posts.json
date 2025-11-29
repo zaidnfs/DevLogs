@@ -1,6 +1,16 @@
 {
   "posts": [
     {
+      "id": "mikptrxs9s3slc8z6zj",
+      "title": "Markdown testing",
+      "excerpt": "nothing much",
+      "bannerUrl": "https://img.freepik.com/free-photo/photorealistic-hummingbird-outdoors-nature_23-2151474112.jpg?semt=ais_hybrid&w=740&q=80",
+      "content": "# Welcome to My Blog\n\nThis is a **bold statement** about how awesome this post is.\n\n## What I Learned\nHere are a few things I picked up recently:\n\n-   The importance of *clean code*\n-   How to use **Markdown** effectively\n-   Why `JavaScript` is so versatile\n\n### Code Example\nCheck out this simple function:\n\n```javascript\nfunction sayHello(name) {\n  console.log(\"Hello, \" + name + \"!\");\n}```",
+      "date": "November 30, 2025",
+      "createdAt": "2025-11-29T19:59:55.312Z",
+      "category": "NOME"
+    },
+    {
       "id": "mikgsgblwpmwks0idus",
       "title": "Lorem Ipsum",
       "excerpt": "What is Lorem Ipsum?",
