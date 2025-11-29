@@ -10,6 +10,8 @@ async function loadBlogPosts() {
 
         const data = await response.json();
         const posts = data.posts || [];
+        const limit = parseInt(postsContainer.dataset.limit);
+        const displayPosts = limit ? posts.slice(0, limit) : posts;
 
         if (posts.length === 0) {
             postsContainer.innerHTML = `
@@ -31,8 +33,8 @@ async function loadBlogPosts() {
             'linear-gradient(135deg, #ef4444, #b91c1c)', // Red
             'linear-gradient(135deg, #06b6d4, #0891b2)', // Cyan
         ];
-
-        postsContainer.innerHTML = posts.map((post, index) => `
+        
+        postsContainer.innerHTML = displayPosts.map((post, index) => `
             <article class="card reveal-squeeze">
                 <div class="card-image" style="background: ${gradients[index % gradients.length]};"></div>
                 <div class="card-content">
@@ -68,6 +70,8 @@ async function loadProjects() {
 
         const data = await response.json();
         const projects = data.projects || [];
+        const limit = parseInt(projectsContainer.dataset.limit);
+        const displayProjects = limit ? projects.slice(0, limit) : projects;
 
         if (projects.length === 0) {
             projectsContainer.innerHTML = `
@@ -90,7 +94,7 @@ async function loadProjects() {
             'linear-gradient(135deg, #06b6d4, #0891b2)', // Cyan
         ];
 
-        projectsContainer.innerHTML = projects.map((project, index) => `
+        projectsContainer.innerHTML = displayProjects.map((project, index) => `
             <article class="card reveal-squeeze">
                 <div class="card-image" style="background: ${gradients[index % gradients.length]};"></div>
                 <div class="card-content">
