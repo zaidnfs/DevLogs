@@ -489,7 +489,7 @@ h6 {
     margin: 0 auto;
     padding-bottom: var(--spacing-xl);
     font-size: 1.125rem;
-    color: #d4d4d8;
+    color: var(--heading-gradient);
 }
 
 .post-content p {
@@ -639,6 +639,7 @@ h6 {
         padding: var(--spacing-md);
     }
 }
+
 /* Social Media Icons */
 .social-links {
     display: flex;
