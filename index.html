@@ -60,43 +60,18 @@
         <!-- Featured Posts -->
         <section class="featured">
             <div class="container">
-                <h2 class="section-title reveal-squeeze">My Favorites</h2>
-                <div class="grid">
-                    <!-- Post 1 -->
-                    <article class="card reveal-squeeze">
-                        <div class="card-image" style="background: linear-gradient(135deg, #3b82f6, #1d4ed8);"></div>
-                        <div class="card-content">
-                            <div class="card-date">Oct 24, 2023</div>
-                            <h3 class="card-title">The Future of Web Design</h3>
-                            <p class="card-excerpt">Exploring the latest trends in UI/UX, from glassmorphism to bento
-                                grids, and how to implement them effectively.</p>
-                            <a href="post.html" class="card-link">Read Article &rarr;</a>
-                        </div>
-                    </article>
-
-                    <!-- Post 2 -->
-                    <article class="card reveal-squeeze">
-                        <div class="card-image" style="background: linear-gradient(135deg, #8b5cf6, #6d28d9);"></div>
-                        <div class="card-content">
-                            <div class="card-date">Oct 10, 2023</div>
-                            <h3 class="card-title">Mastering CSS Grid</h3>
-                            <p class="card-excerpt">A deep dive into modern layout techniques. Say goodbye to floats and
-                                hello to two-dimensional layouts.</p>
-                            <a href="post.html" class="card-link">Read Article &rarr;</a>
-                        </div>
-                    </article>
-
-                    <!-- Post 3 -->
-                    <article class="card reveal-squeeze">
-                        <div class="card-image" style="background: linear-gradient(135deg, #10b981, #059669);"></div>
-                        <div class="card-content">
-                            <div class="card-date">Sep 28, 2023</div>
-                            <h3 class="card-title">Why I Switched to Linux</h3>
-                            <p class="card-excerpt">My personal journey moving from Windows to a custom Arch Linux setup
-                                for development.</p>
-                            <a href="post.html" class="card-link">Read Article &rarr;</a>
-                        </div>
-                    </article>
+                <h2 class="section-title reveal-squeeze">Featured Posts</h2>
+                <div class="grid" id="blog-posts-grid">
+                    <!-- Posts will be loaded dynamically by blog-loader.js -->
+                </div>
+            </div>
+        </section>
+        <!-- Featured Projects -->
+        <section class="featured">
+            <div class="container">
+                <h2 class="section-title reveal-squeeze">Featured Projects</h2>
+                <div class="grid" id="projects-grid">
+                    <!-- Projects will be loaded dynamically by blog-loader.js -->
                 </div>
             </div>
         </section>
@@ -184,6 +159,7 @@
     </footer>
 
     <script src="js/main.js"></script>
+    <script src="js/blog-loader.js"></script>
 </body>
 
 </html>
